@@ -1,12 +1,9 @@
 .name {
 	font-family: "Arial", sans-serif;
+	font-weight: bold;
 }
 
 .trip {
-	font-family: "Courier New", monospace;
-}
-
-.pid {
 	font-family: "Courier New", monospace;
 }
 
