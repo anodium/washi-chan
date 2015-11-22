@@ -37,7 +37,7 @@ class makepost:
 		postdata = web.input()
 		db = sqlite3.connect('post.db')
 		dbc = db.cursor()
-		dbc.execute("INSERT INTO Post VALUES (?, ?, ?, ?)", (postdata.board, postdata.name, tripcode(postdata.trip), postdata.body))
+		dbc.execute("INSERT INTO Post VALUES (?, ?, ?, ?, ?)", (postdata.img, postdata.board, postdata.name, tripcode(postdata.trip), postdata.body))
 		db.commit()
 		db.close()
 		return render.redirect()

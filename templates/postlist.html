@@ -14,12 +14,12 @@ $def with (posts)
 	</head>
 	<body>
 		<h1>Washi-chan (<a href='/help'>Help</a>)</h1>
-		<pre>Board /$posts[0][0]/</pre>
+		<pre>Board /$posts[0][1]/</pre>
 		$for p in posts:
 			<hr/>
-			<span class='name'>$p[1]</span>
-			(<span class='trip'>$p[2]</span>)
-			<br/>
-			<div class='mesg'>$p[3]</div>
+			<span class='name'>$p[2]</span>
+			(<span class='trip'>$p[3]</span>)
+			<br/><img src=$p[0] height=128 width=128 />
+			<p class='mesg'>$p[4]</p>
 	</body>
 </html>
