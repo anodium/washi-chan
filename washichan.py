@@ -22,9 +22,11 @@ class index:
 
 class postlist:
 	def GET(self):
-		db = sqlite3.connect('posts.db')
+		if web.input().b == 'main':
+			return render.boardlist()
+		db = sqlite3.connect('post.db')
 		dbc = db.cursor()
-		dbc.execute("SELECT * FROM Posts;")
+		dbc.execute("SELECT * FROM Post WHERE Board=?", (web.input().b))
 		return render.postlist(dbc.fetchall())
 
 class makepost:
@@ -33,9 +35,9 @@ class makepost:
 	
 	def POST(self):
 		postdata = web.input()
-		db = sqlite3.connect('posts.db')
+		db = sqlite3.connect('post.db')
 		dbc = db.cursor()
-		dbc.execute("INSERT INTO Posts\nVALUES (?, ?, ?);", (postdata.name, tripcode(postdata.trip), postdata.body))
+		dbc.execute("INSERT INTO Post VALUES (?, ?, ?, ?)", (postdata.board, postdata.name, tripcode(postdata.trip), postdata.body))
 		db.commit()
 		db.close()
 		return render.redirect()

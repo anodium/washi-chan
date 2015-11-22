@@ -12,9 +12,10 @@ $def with ()
 	</head>
 	<body>
 		<form method='post' action='/post'>
-			<pre>Name: </pre><input type='text' name='name' /><br />
-			<pre>Tripcode: </pre><input type='text' name='trip' /><br />
-			<pre>Message: </pre><textarea rows='2' cols='32' name='body'></textarea><br />
+			<input type='text' name='board' maxlength='1' placeholder='Board' />
+			<input type='text' name='name' maxlength='32' placeholder='Name' />
+			<input type='text' name='trip' placeholder='Tripcode' />
+			<textarea rows='2' cols='32' name='body' placeholder='Message'></textarea>
 			<input type='submit' name='Post' value='Post' />
 		</form>
 	</body>
