@@ -1,0 +1,70 @@
+$def with (posts)
+
+<!doctype html>
+
+<html>
+	<head>
+		<link type="image/x-icon" rel="icon" href="static/image/favicon.ico" />
+		<link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+		
+		<title>Washi-chan</title>
+	</head>
+	<body>
+		<nav>
+			<div class="nav-wrapper blue">
+				<div class="container">
+					<span class="brand-logo">Washi-chan</span>
+				</div>
+			</div>
+		</nav>
+		$for p in posts:
+			<div class="row">
+				<div class="col s12">
+					<div class="card white-text">
+						<div class="card-content blue darken-1">
+							<span class="card-title">$p[0]</span>
+							<p>$p[2]</p>
+						</div>
+						<div class="card-action blue darken-3">
+							$p[1]
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<div class="row">
+			<form class="col s12" action="/" method="POST">
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="mdi-action-account-circle prefix"></i>
+						<input id="icon_prefix" name="name" type="text" class="validate" />
+						<label for="icon_prefix">Name</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="mdi-action-polymer prefix"></i>
+						<input id="icon_prefix" name="trip" type="text" class="validate" />
+						<label for="icon_prefix">Tripcode</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea class="materialize-textarea" name="mesg"></textarea>
+						<label>Message</label>
+					</div>
+				</div>
+				<div class="row">
+					<button class="btn waves-effect waves-light" type="submit" name="action">Post
+					<i class="mdi-content-send right"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row container">
+			<a class="btn-floating btn-large waves-effect waves-light blue" href="/" style="position: fixed; top: 90%; left: 90%"><i class="mdi-navigation-refresh"></i></a>
+		</div>
+		
+		<script type="text/javascript" src="static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="static/js/materialize.min.js"></script>
+	</body>
+</html>

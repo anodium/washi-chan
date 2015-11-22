@@ -7,48 +7,29 @@ import sqlite3
 web.config.debug = False
 
 urls = (
-	'/', 'index',
-	'/list', 'postlist',
-	'/post', 'makepost',
-	'/help', 'help',
-	'/styles.css', 'styles'
+	'/', 'index'
 )
 
 render = web.template.render('templates')
 
 class index:
 	def GET(self):
-		return render.frames()
-
-class postlist:
-	def GET(self):
-		if web.input().b == 'main':
-			return render.boardlist()
-		db = sqlite3.connect('post.db')
+		db = sqlite3.connect('board.db')
 		dbc = db.cursor()
-		dbc.execute("SELECT * FROM Post WHERE Board=?", (web.input().b))
-		return render.postlist(dbc.fetchall())
-
-class makepost:
-	def GET(self):
-		return render.makepost()
+		dbc.execute('select * from posts')
+		posts = dbc.fetchall()
+		db.close()
+		return render.index(posts)
 	
 	def POST(self):
-		postdata = web.input()
-		db = sqlite3.connect('post.db')
+		db = sqlite3.connect('board.db')
 		dbc = db.cursor()
-		dbc.execute("INSERT INTO Post VALUES (?, ?, ?, ?, ?)", (postdata.img, postdata.board, postdata.name, tripcode(postdata.trip), postdata.body))
+		dbc.execute('insert into posts values (?, ?, ?)', (web.input().name, tripcode(web.input().trip), web.input().mesg))
 		db.commit()
+		dbc.execute('select * from posts')
+		posts = dbc.fetchall()
 		db.close()
-		return render.redirect()
-
-class help:
-	def GET(self):
-		return render.help()
-
-class styles:
-	def GET(self):
-		return render.styles()
+		return render.index(posts)
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
